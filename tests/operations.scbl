@@ -1,0 +1,13 @@
+# I made functions for the two simplest operations; addition and subtraction.
+# The function for addition is add and it takes in two 64bit integers as parameters.
+# The result is put into the variable result.
+add 24:8 8:8 # 8 bytes = 64 bits
+print result
+
+# Subtraction function works the same, the name is sub
+sub result 16:8
+
+print result
+# The output doesnt show anything, just blank lines. This is because the function print
+# attempts to output it by the ascii encoding, in which the character with the ID 16 is
+# some control character.

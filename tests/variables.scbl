@@ -1,0 +1,11 @@
+# Since constants can be modified at runtime (from the C++ side), you can create a simple
+# variable system. I made the function var which takes in a string, which is the variable
+# name, and then the value, which can be anything.
+var "test" 65
+print test
+
+var "test" 65 66 67 68 69 70
+print test
+
+var "test" "ABC"
+print test

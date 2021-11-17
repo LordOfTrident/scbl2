@@ -1,0 +1,9 @@
+# print automatically outputs a new line after the string
+print "Hello, World!"
+
+# puts doesnt do this tho
+puts "Hello, World!\n"
+
+
+var "helloworld" "Hello, World!" # null terminators are ignored by puts and print
+puts helloworld /* you can use 10:1 or "\n" for a new line */ "\n"

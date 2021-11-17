@@ -1,0 +1,23 @@
+# To solve the problem from operations.scbl, the integer needs to be converted into a string.
+# For this theres a function called tostr which takes in an integer of any size and puts the
+# result into the variable result.
+tostr 32
+print result
+
+# The output is 32
+
+add 24:8 8:8
+sub result 16:8
+tostr result
+print result
+
+# Success
+# If you stored an integer that is not 64bits large and want to use it in the add or sub
+# functions, you need to convert it to 64bits. For this theres the function to64b which,
+# just like tostr, takes in an integer of any size and puts the result into the variable
+# result.
+var "int" 5
+to64b int
+add result 5:8
+tostr result
+print result
