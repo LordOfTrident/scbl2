@@ -5,9 +5,6 @@
  *
  *  Example under example/ folder, documentation in
  *  README.md
- *
- *  define SCBL_DONT_USE_EXCEPTIONS symbol for the library to
- *  use return codes instead of exceptions
  */
 
 #ifndef __SCBL_HH_HEADER_GUARD__
@@ -24,7 +21,7 @@
 
 #define SCBL_VERSION_MAJOR 2
 #define SCBL_VERSION_MINOR 1
-#define SCBL_VERSION_PATCH 1
+#define SCBL_VERSION_PATCH 2
 
 // Prevent long case repetition
 
@@ -125,7 +122,6 @@ namespace SCBL {
 
 	using Callback = std::function<void(std::vector<u8>, void*)>;
 
-#ifndef SCBL_DONT_USE_EXCEPTIONS
 	class Exception {
 		public:
 			Exception(const std::string &p_message):
@@ -191,7 +187,6 @@ namespace SCBL {
 		protected:
 			usize m_idx;
 	}; // class RuntimeException
-#endif // SCBL_DONT_USE_EXCEPTIONS
 
 	namespace Tools {
 		// Byte Splitter and Joiner
@@ -278,31 +273,21 @@ namespace SCBL {
 
 		class ParamHandler {
 		public:
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-			static constexpr const s8 Error = -1;
-#endif // SCBL_DONT_USE_EXCEPTIONS
+			ParamHandler() {};
 
 			ParamHandler(const std::vector<u8> &p_params):
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-				m_outOfParams(false),
-#endif // SCBL_DONT_USE_EXCEPTIONS
-				m_params(p_params),
+				m_params(&p_params),
 				m_it(p_params.cbegin())
 			{};
 
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-			bool IsOutOfParams() {
-				return m_outOfParams;
+			void SetParams(const std::vector<u8> &p_params) {
+				m_params = &p_params;
+				m_it = p_params.cbegin();
 			};
-#endif // SCBL_DONT_USE_EXCEPTIONS
 
 			u8 GetNextParam8() {
-				if (m_it == m_params.cend())
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-					return Error;
-#else // not SCBL_DONT_USE_EXCEPTIONS
+				if (m_it == m_params->cend())
 					throw Exception("Out of parameters");
-#endif // SCBL_DONT_USE_EXCEPTIONS
 
 				const u8 toReturn = *m_it;
 				++ m_it;
@@ -311,23 +296,14 @@ namespace SCBL {
 			};
 
 			u16 GetNextParam16() {
-				if (m_it == m_params.cend())
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-					return Error;
-#else // not SCBL_DONT_USE_EXCEPTIONS
+				if (m_it == m_params->cend())
 					throw Exception("Out of parameters");
-#endif // SCBL_DONT_USE_EXCEPTIONS
 
 				std::vector<u8> bytes;
 
 				for (u8 i = 0; i < 2; ++ i, ++ m_it) {
-					// if (m_params.size() <= m_it + i)
-					if (m_it == m_params.cend())
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-					return Error;
-#else // not SCBL_DONT_USE_EXCEPTIONS
-					throw Exception("Out of parameters");
-#endif // SCBL_DONT_USE_EXCEPTIONS
+					if (m_it == m_params->cend())
+						throw Exception("Out of parameters");
 
 					bytes.push_back(*m_it);
 				};
@@ -337,22 +313,14 @@ namespace SCBL {
 			};
 
 			u32 GetNextParam32() {
-				if (m_it == m_params.cend())
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-					return Error;
-#else // not SCBL_DONT_USE_EXCEPTIONS
+				if (m_it == m_params->cend())
 					throw Exception("Out of parameters");
-#endif // SCBL_DONT_USE_EXCEPTIONS
 
 				std::vector<u8> bytes;
 
 				for (u8 i = 0; i < 4; ++ i, ++ m_it) {
-					if (m_it == m_params.cend())
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-					return Error;
-#else // not SCBL_DONT_USE_EXCEPTIONS
-					throw Exception("Out of parameters");
-#endif // SCBL_DONT_USE_EXCEPTIONS;
+					if (m_it == m_params->cend())
+						throw Exception("Out of parameters");
 
 					bytes.push_back(*m_it);
 				};
@@ -362,22 +330,14 @@ namespace SCBL {
 			};
 
 			u64 GetNextParam64() {
-				if (m_it == m_params.cend())
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-					return Error;
-#else // not SCBL_DONT_USE_EXCEPTIONS
+				if (m_it == m_params->cend())
 					throw Exception("Out of parameters");
-#endif // SCBL_DONT_USE_EXCEPTIONS
 
 				std::vector<u8> bytes;
 
 				for (u8 i = 0; i < 8; ++ i, ++ m_it) {
-					if (m_it == m_params.cend())
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-					return Error;
-#else // not SCBL_DONT_USE_EXCEPTIONS
-					throw Exception("Out of parameters");
-#endif // SCBL_DONT_USE_EXCEPTIONS
+					if (m_it == m_params->cend())
+						throw Exception("Out of parameters");
 
 					bytes.push_back(*m_it);
 				};
@@ -387,29 +347,21 @@ namespace SCBL {
 			};
 
 			u64 GetNextParamInt() {
-				if (m_it == m_params.cend())
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-					return Error;
-#else // not SCBL_DONT_USE_EXCEPTIONS
+				if (m_it == m_params->cend())
 					throw Exception("Out of parameters");
-#endif // SCBL_DONT_USE_EXCEPTIONS
 
 				std::vector<u8> bytes;
 				u8 size;
 
 				for (size = 0; size < 8; ++ size, ++ m_it) {
-					if (m_it == m_params.cend())
+					if (m_it == m_params->cend())
 						break;
 
 					bytes.push_back(*m_it);
 				};
 
 				if (bytes.empty())
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-					return Error;
-#else // not SCBL_DONT_USE_EXCEPTIONS
 					throw Exception("Out of parameters");
-#endif // SCBL_DONT_USE_EXCEPTIONS
 
 				m_byteSJ.SetList(bytes);
 
@@ -428,15 +380,11 @@ namespace SCBL {
 			};
 
 			std::string GetNextParamStr() {
-				if (m_it == m_params.cend())
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-					return Error;
-#else // not SCBL_DONT_USE_EXCEPTIONS
+				if (m_it == m_params->cend())
 					throw Exception("Out of parameters");
-#endif // SCBL_DONT_USE_EXCEPTIONS
 
 				std::string str;
-				for (; m_it != m_params.cend(); ++ m_it) {
+				for (; m_it != m_params->cend(); ++ m_it) {
 					if (*m_it == 0) {
 						++ m_it;
 						break;
@@ -449,15 +397,11 @@ namespace SCBL {
 			};
 
 			void ResetCounter() {
-				m_it = m_params.cbegin();
+				m_it = m_params->cbegin();
 			};
 
 		private:
-#ifdef SCBL_DONT_USE_EXCEPTIONS
-			bool m_outOfParams;
-#endif // SCBL_DONT_USE_EXCEPTIONS
-
-			const std::vector<u8> &m_params;
+			const std::vector<u8> *m_params;
 			std::vector<u8>::const_iterator m_it;
 
 			ByteSJ m_byteSJ;
@@ -477,7 +421,7 @@ namespace SCBL {
 			"Expected " + p_expect + ", got " + p_got + " instead";
 	};
 
-	enum class TokenType {
+	enum class TokenType : u8 {
 		Int,
 		Id,
 		Str,
@@ -654,7 +598,6 @@ namespace SCBL {
 							ExpectedErrorMsg("string end", GetCurrCharName()),
 							m_line, m_col
 						);
-
 					break;
 
 				default:
@@ -816,7 +759,7 @@ namespace SCBL {
 		bool m_escape;
 	}; // class Lexer
 
-	enum class StructcodeType {
+	enum class StructcodeType : u8 {
 		Int,
 		Id
 	}; // enum class StructcodeType

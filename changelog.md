@@ -8,3 +8,4 @@ All the versions and the changes they bring
 - `2.0.5`: Improved compiler
 - `2.1.0`: Finished interpreter (environment)
 - `2.1.1`: Fixed parameters handler
+- `2.1.2`: Removed no exceptions support and improved ParamHandler

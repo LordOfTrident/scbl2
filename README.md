@@ -1,6 +1,5 @@
 <p align="center">
-	<img width="100px" src="assets/logo_alt.png"/>
-	<h1 align="center">SCBL</h2>
+	<img width="100px" src="assets/logo_plain.png"/>
 	<p align="center">Simple Command Bar Language version 2</p>
 </p>
 <p align="center">
@@ -16,8 +15,8 @@
 	<br><br><br>
 </p>
 
-A simple, small coding language to be embedded with a C++ program.
-This library has to be compiled as atleast C++17.
+A simple, small coding language to be embedded with a C++ program. See SCBL Version 1
+[here](https://github.com/LordOfTrident/scbl). This library has to be compiled as atleast C++17.
 
 ## Features
 - Functions (can be set at runtime)
