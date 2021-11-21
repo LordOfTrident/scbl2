@@ -13,9 +13,9 @@ F_HEADER = \
 	example/app.hh\
 	example/utils.hh\
 	example/types.hh\
-	example/components.inc\
-	example/platform.inc\
-	example/config.inc
+	example/components.hh\
+	example/platform.hh\
+	example/config.hh
 
 F_ALL = ${F_SRC} ${F_HEADER}
 

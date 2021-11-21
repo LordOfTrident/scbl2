@@ -1,5 +1,5 @@
-#ifndef __PLATFORM_INC_HEADER_GUARD__
-#define __PLATFORM_INC_HEADER_GUARD__
+#ifndef __PLATFORM_HH_HEADER_GUARD__
+#define __PLATFORM_HH_HEADER_GUARD__
 
 #if defined(WIN32) or defined(_WIN32) or defined(__WIN32__) or defined(__NT__)
 // Windows
@@ -38,4 +38,4 @@
 #	define PLATFORM_UNKNOWN
 #endif
 
-#endif // __PLATFORM_INC_HEADER_GUARD__
+#endif // __PLATFORM_HH_HEADER_GUARD__

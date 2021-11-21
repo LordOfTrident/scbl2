@@ -1,9 +1,9 @@
 #ifndef __APP_HH_HEADER_GUARD__
 #define __APP_HH_HEADER_GUARD__
 
-#include "config.inc"
+#include "config.hh"
 
-#include "components.inc"
+#include "components.hh"
 #include "types.hh"
 #include "utils.hh"
 

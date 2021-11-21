@@ -1,10 +1,10 @@
 #ifndef __UTILS_HH_HEADER_GUARD__
 #define __UTILS_HH_HEADER_GUARD__
 
-#include "components.inc"
+#include "components.hh"
 #include "types.hh"
-#include "platform.inc"
-#include "config.inc"
+#include "platform.hh"
+#include "config.hh"
 
 // Use GNU readline if it is allowed and possible
 #if defined(PLATFORM_LINUX) and defined(UTILS_USE_GNU_READLINE)

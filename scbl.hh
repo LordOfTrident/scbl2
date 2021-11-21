@@ -1,6 +1,6 @@
 /*
  *  SCBL - Simple Command Bar Language
- *  Version 2.1.2
+ *  Version 2.1.4
  *  Github: https://github.com/LordOfTrident/scbl2
  *
  *  Example under example/ folder, documentation in
@@ -21,7 +21,7 @@
 
 #define SCBL_VERSION_MAJOR 2
 #define SCBL_VERSION_MINOR 1
-#define SCBL_VERSION_PATCH 2
+#define SCBL_VERSION_PATCH 4
 
 // Prevent long case repetition
 
