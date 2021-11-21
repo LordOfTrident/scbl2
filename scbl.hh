@@ -1,6 +1,6 @@
 /*
  *  SCBL - Simple Command Bar Language
- *  Version 2.1.1
+ *  Version 2.1.2
  *  Github: https://github.com/LordOfTrident/scbl2
  *
  *  Example under example/ folder, documentation in

@@ -1,11 +1,11 @@
 #ifndef __APP_HH_HEADER_GUARD__
 #define __APP_HH_HEADER_GUARD__
 
-#include <config.inc>
+#include "config.inc"
 
-#include <components.inc>
-#include <types.hh>
-#include <utils.hh>
+#include "components.inc"
+#include "types.hh"
+#include "utils.hh"
 
 namespace Example {
 	class App {
@@ -26,13 +26,13 @@ namespace Example {
 		static const constexpr u8 FileNotFound  = 4;
 
 		App();
-		App(const u8 p_argc, const char* p_argv[]);
+		App(const u8 p_argc, const char *p_argv[]);
 
 		~App();
 
 		u8 GetExitcode() const;
 
-		void Start(const u8 p_argc, const char* p_argv[]);
+		void Start(const u8 p_argc, const char *p_argv[]);
 		void Repl(); // Read Eval Print Loop
 		void InterpretFiles(const std::vector<std::string> &p_files);
 

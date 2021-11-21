@@ -1,11 +1,11 @@
-#include <app.hh>
+#include "app.hh"
 
 // public
 Example::App::App() {
 	Init();
 };
 
-Example::App::App(const u8 p_argc, const char* p_argv[]):
+Example::App::App(const u8 p_argc, const char *p_argv[]):
 	m_exitCode(0)
 {
 	Init();
@@ -24,7 +24,7 @@ void Example::App::SCBLInterpret(const std::string &p_code) {
 	m_scble.Run(m_scblc.GetStructcode());
 };
 
-void Example::App::Start(const u8 p_argc, const char* p_argv[]) {
+void Example::App::Start(const u8 p_argc, const char *p_argv[]) {
 	std::vector<std::string> files = {};
 
 	bool startRepl = true;
